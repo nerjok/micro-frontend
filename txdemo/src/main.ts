@@ -20,8 +20,13 @@ function displayWelcomeMessage() {
 
     fromEvent(flightsLink, 'click').subscribe(async () => {
         const module = await import('subproj/component');
-
         const elm = document.createElement(module.elementName);
+        elm.setAttribute('custProp', 'ttt');
+        elm.title = { title: 'Label'};
+        setTimeout(() => {
+            elm.title = {title: "updatedLabel"};
+            elm.setAttribute('custProp', 'vvv');
+        }, 1000);
         removeFirstChild();
         container.appendChild(elm);
     });

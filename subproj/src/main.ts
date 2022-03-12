@@ -1,13 +1,31 @@
 class Microfrontend1 extends HTMLElement {
+    set title(title) {
+        console.log('setTitle', title);
+        
+    }
+    get title() {
+        return (this.getAttribute('custProp')as any)?.title;
+    }
+
+    static get observedAttributes() {
+        return ['title', 'custProp'];
+    }
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
     }
-
+    attributeChangedCallback(attrName, oldVal, newVal) {
+        console.log('[[attrChange]]', arguments);
+        
+        if (oldVal !== newVal) {
+    
+        }
+      }
     async connectedCallback() {
         this.shadowRoot.innerHTML = `
             <div id="container">
-                <h1>Web component in sub mfe</h1>
+                <h1>Web component in sub microfrontent</h1>
+                <h2>${this.title}</h2>
                 <div>
                     Message:
                 </div>
